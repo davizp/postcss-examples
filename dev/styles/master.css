@@ -1,0 +1,99 @@
+/* Variables ==================================================================*/
+		/* EXAMPLE 1 - cssnext */
+		:root {
+			--mainColor: grey;
+		}
+		/* EXAMPLE 2 - postcss-simple-vars */
+		$blue : #0F0;
+
+	h1 {
+		background: var(--mainColor);
+		color: $blue;
+	}
+
+/* Autoprefix - autoprefixer ==================================================*/
+	h2 {
+		display: flex;
+	}
+
+/* NESTING - postcss-nested  ==================================================*/
+	h3 {
+		font-size: 12px;
+		span {
+			color: red;
+		}
+	}
+
+/* Import - Note : "postcss-import" needs to be the first preprocesor  ========*/
+@import "partials/blue.css";
+
+
+/*
+	Mixins - 
+	Note: "postcss-mixins" requirements (postcss-simple-vars & postcss-nested) 
+ ==============================================================================*/
+	/* Example 1  */
+	@define-mixin icon $network, $color: blue {
+		.icon.is-$(network) {
+			color: $color;
+			@mixin-content;
+		}
+		.icon.is-$(network):hover {
+			color: white;
+			background: $color;
+		}
+	}
+	
+	@mixin icon twitter {
+		background: url(twt.png);
+	}
+	@mixin icon youtube, red {
+		background: url(youtube.png);
+	}
+	/* Example 2 */
+	@define-mixin icon $name {
+		padding-left: 16px;
+		&::after {
+			content: "";
+			background-url: url(/icons/$(name).png);
+		}
+	}
+
+	.search {
+		@mixin icon search;
+	}
+
+/* Properties - "postcss-define-property"  ====================================*/
+	/* size : 2 parameter */
+	size: $height $width {
+		height: $height;
+		width: $width;
+	}
+	/* size : 1 parameter */
+	size: $size {
+		height: $size;
+		width: $size;
+	}
+
+	.rectangle {
+	  size: 50px 100px;
+	}
+
+	.square {
+	  size: 50px;
+	}
+/* Pixels to REM - postcss-pxtorem =====================================*/
+// `px` is converted to `rem`
+.convert {
+    font-size: 16px; /* converted to 1rem */
+}
+
+// `Px` or `PX` is ignored by `postcss-pxtorem` but still accepted by browsers
+.ignore {
+    border: 1Px solid; /* ignored */
+    border-width: 2PX; /* ignored */
+}
+
+/* Extend - postcss- =====================================*/
+/* Operators - postcss- =====================================*/
+/* Operators - postcss- =====================================*/
