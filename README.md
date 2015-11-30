@@ -19,7 +19,7 @@ gulp server
 Server should start in <a href="http://localhost:3000/">http://localhost:3000/</a>
 
 ## Examples
-### Variables
+	Variables
 ```sass
 	/* EXAMPLE 1 - cssnext */
 		:root {
