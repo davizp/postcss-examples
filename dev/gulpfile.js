@@ -40,16 +40,34 @@ var wrap			= require('gulp-wrap');
 // 					📑	CSS								|
 // - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	gulp.task('styles',function(){
+		gulp.slurped = true;
 		var processors = [
-			// csswring({}),
+			// csswring({}), // this is for minification
 			require('postcss-import'),
 			require('postcss-define-property'),
-			autoprefixer({}),
-			cssnext({}),
+			autoprefixer,
+			cssnext,
 			require('postcss-nested'),
 			require('postcss-mixins'),
+			require('postcss-sassy-mixins'),
 			require('postcss-simple-vars'),
-			require('postcss-pxtorem')
+			require('postcss-extend'),
+			require('postcss-functions')({
+				// TODO: CREATE A FUNCTION FILE
+			    functions: {
+			        "strip-units": function (val) {
+			        	val = val.match(/^[0-9]*/g);
+						return (val / (val * 0 + 1));
+			        },
+					px_rem: function (pxval,base) {
+						pxval = pxval.match(/^[0-9]*/g) || -1;
+						base = (base)?base.match(/^[0-9]*/g) : 16;
+
+						return (pxval / base) + "rem";
+					}
+			    }
+			}),
+			require('postcss-calc')
 		];
 		return gulp.src('./styles/**/*.css')
 		.pipe(postcss(processors))

@@ -4,7 +4,7 @@
 			--mainColor: grey;
 		}
 		/* EXAMPLE 2 - postcss-simple-vars */
-		$blue : #0F0;
+		$blue : #00F;
 
 	h1 {
 		background: var(--mainColor);
@@ -25,7 +25,7 @@
 	}
 
 /* Import - Note : "postcss-import" needs to be the first preprocesor  ========*/
-@import "partials/blue.css";
+@import "partials/background.css";
 
 
 /*
@@ -82,18 +82,36 @@
 	.square {
 	  size: 50px;
 	}
-/* Pixels to REM - postcss-pxtorem =====================================*/
-// `px` is converted to `rem`
-.convert {
-    font-size: 16px; /* converted to 1rem */
-}
 
-// `Px` or `PX` is ignored by `postcss-pxtorem` but still accepted by browsers
-.ignore {
-    border: 1Px solid; /* ignored */
-    border-width: 2PX; /* ignored */
-}
+/* Extend - postcss-extend =====================================*/
+	.message {
+	  border: 1px solid #ccc;
+	  padding: 10px;	
+	  color: #333;
+	}
 
-/* Extend - postcss- =====================================*/
-/* Operators - postcss- =====================================*/
-/* Operators - postcss- =====================================*/
+	.success {
+	  @extend .message;
+	  border-color: green;
+	}
+
+/* Operators - postcss-calc =====================================*/
+
+	article[role="main"] {
+	  float: left;
+	  width: calc( 600 / 960 * 100%);
+	}
+
+	.bar {
+		height: calc(50px + 12px);  /* 62px */
+
+	}
+
+
+/* Functions - postcss-functions =====================================*/
+	h2 {
+		font-size: px_rem(15px);
+
+	}
+
+
