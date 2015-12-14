@@ -83,7 +83,7 @@
 	  size: 50px;
 	}
 
-/* Extend - postcss-extend =====================================*/
+/* Extend - postcss-extend ====================================================*/
 	.message {
 	  border: 1px solid #ccc;
 	  padding: 10px;	
@@ -95,7 +95,7 @@
 	  border-color: green;
 	}
 
-/* Operators - postcss-calc =====================================*/
+/* Operators - cssnext ========================================================*/
 
 	article[role="main"] {
 	  float: left;
@@ -104,14 +104,14 @@
 
 	.bar {
 		height: calc(50px + 12px);  /* 62px */
+		height: calc(50px - 13px);  /* 37px */
 
 	}
 
 
-/* Functions - postcss-functions =====================================*/
+/* Functions - postcss-functions ==============================================*/
 	h2 {
+	/* nextcss - rem fallback to px (if you browser scope cover old browsers). */
 		font-size: px_rem(15px);
 
 	}
-
-

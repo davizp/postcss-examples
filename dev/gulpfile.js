@@ -46,12 +46,6 @@ var wrap			= require('gulp-wrap');
 			require('postcss-import'),
 			require('postcss-define-property'),
 			autoprefixer,
-			cssnext,
-			require('postcss-nested'),
-			require('postcss-mixins'),
-			require('postcss-sassy-mixins'),
-			require('postcss-simple-vars'),
-			require('postcss-extend'),
 			require('postcss-functions')({
 				// TODO: CREATE A FUNCTION FILE
 			    functions: {
@@ -67,7 +61,12 @@ var wrap			= require('gulp-wrap');
 					}
 			    }
 			}),
-			require('postcss-calc')
+			cssnext(),
+			require('postcss-nested'),
+			require('postcss-mixins'),
+			require('postcss-sassy-mixins'),
+			require('postcss-simple-vars'),
+			require('postcss-extend')
 		];
 		return gulp.src('./styles/**/*.css')
 		.pipe(postcss(processors))
